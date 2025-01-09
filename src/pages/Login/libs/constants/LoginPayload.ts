@@ -1,5 +1,5 @@
 const LoginPayload = {
-  name: "admin",
+  name: import.meta.env.VITE_NAME,
   username: "",
   password: "",
 } as const;

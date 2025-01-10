@@ -1,5 +1,5 @@
-import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { InputIcon } from "@/components";
+import { Dropdown } from "./components";
 
 const Navbar = () => {
   const onSearch = (name: string, value: string) => {
@@ -18,9 +18,7 @@ const Navbar = () => {
           icon="akar-icons:search"
           onChange={onSearch}
         />
-        <button>
-          <Icon icon="gg:profile" className="text-3xl" />
-        </button>
+        <Dropdown />
       </section>
       <section className="mt-5 md:hidden">
         <InputIcon

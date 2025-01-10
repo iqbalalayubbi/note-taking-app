@@ -11,7 +11,7 @@ const Navbar = () => {
       <section className="flex justify-between items-center">
         <h1 className="text-2xl font-bold text-purple-800">SIMPLIFY NOTE</h1>
         <InputIcon
-          className="rounded-full hidden"
+          className="rounded-full hidden md:block md:w-2/3 lg:w-1/2"
           type="text"
           name="search"
           placeholder="Find your notes..."
@@ -22,7 +22,7 @@ const Navbar = () => {
           <Icon icon="gg:profile" className="text-3xl" />
         </button>
       </section>
-      <section className="mt-5">
+      <section className="mt-5 md:hidden">
         <InputIcon
           className="rounded-full"
           type="text"

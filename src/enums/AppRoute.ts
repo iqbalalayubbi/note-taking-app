@@ -1,5 +1,6 @@
 const AppRoute = {
-  login: "/login",
+  LOGIN: "/login",
+  NOTES: "/notes",
 } as const;
 
 export { AppRoute };

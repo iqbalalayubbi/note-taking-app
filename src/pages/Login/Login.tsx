@@ -3,10 +3,13 @@ import { Button, InputIcon, Popup } from "@/components";
 import { LoginPayload } from "./libs/constants";
 import { userDataStorage } from "@/api";
 import { USER_PASSWORD, USER_USERNAME } from "@/constants";
+import { useNavigate } from "react-router";
+import { AppRoute } from "@/enums";
 
 const Login = () => {
   const [formLogin, setFormLogin] = useState(LoginPayload);
   const [isError, setIsError] = useState(false);
+  const navigate = useNavigate();
 
   const onChange = (name: string, val: string) => {
     setFormLogin((prev) => ({ ...prev, [name]: val }));
@@ -22,6 +25,7 @@ const Login = () => {
         username,
         isAuthenticated: true,
       });
+      navigate(AppRoute.NOTES);
     } else {
       setIsError(true);
     }

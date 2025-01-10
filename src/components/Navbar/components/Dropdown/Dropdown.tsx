@@ -10,7 +10,11 @@ const Dropdown = () => {
 
   return (
     <div className="relative flex flex-col items-center">
-      <button className="hover:opacity-50" onClick={() => toggleDropdown()}>
+      <button
+        className="hover:opacity-50 flex items-center gap-3 "
+        onClick={() => toggleDropdown()}
+      >
+        <span className="font-bold">Steve Smith</span>
         <Icon icon="gg:profile" className="text-3xl" />
       </button>
       {isOpen && (
@@ -23,13 +27,20 @@ const Dropdown = () => {
             aria-labelledby="dropdownDefaultButton"
           >
             <li>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100">
+              <a
+                href="#"
+                className="block px-4 py-2 hover:bg-gray-200 font-semibold"
+              >
                 Profile
               </a>
             </li>
             <li>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100">
-                Profile
+              <a
+                href="#"
+                className="px-4 py-2 flex items-center gap-3 hover:bg-red-400 hover:text-white font-semibold"
+              >
+                Logout
+                <Icon icon="humbleicons:logout" className="" />
               </a>
             </li>
           </ul>

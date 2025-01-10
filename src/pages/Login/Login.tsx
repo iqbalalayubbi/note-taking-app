@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { InputIcon, Popup } from "@/components";
+import { useState } from "@/hooks";
+import { Button, InputIcon, Popup } from "@/components";
 import { LoginPayload } from "./libs/constants";
 import { userDataStorage } from "@/api";
+import { USER_PASSWORD, USER_USERNAME } from "@/constants";
 
 const Login = () => {
   const [formLogin, setFormLogin] = useState(LoginPayload);
@@ -14,9 +15,8 @@ const Login = () => {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const { name, username, password } = formLogin;
-    const { VITE_USERNAME, VITE_PASSWORD } = import.meta.env;
 
-    if (username === VITE_USERNAME && password === VITE_PASSWORD) {
+    if (username === USER_USERNAME && password === USER_PASSWORD) {
       userDataStorage.setUserData({
         name,
         username,
@@ -64,12 +64,7 @@ const Login = () => {
           name="password"
           onChange={onChange}
         />
-        <button
-          className="rounded-full w-3/4 bg-purple-500 py-3 mt-10 font-bold text-white"
-          type="submit"
-        >
-          Login
-        </button>
+        <Button label="Login" type="submit" className="w-3/4 mt-10" />
       </form>
     </main>
   );

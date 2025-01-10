@@ -1,0 +1,4 @@
+const { VITE_USERNAME: USER_USERNAME, VITE_PASSWORD: USER_PASSWORD } =
+  import.meta.env;
+
+export { USER_USERNAME, USER_PASSWORD };

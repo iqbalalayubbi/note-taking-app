@@ -1,5 +1,7 @@
+import { AppRoute } from "@/enums";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { useState } from "react";
+import { Link } from "react-router";
 
 const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,21 +29,21 @@ const Dropdown = () => {
             aria-labelledby="dropdownDefaultButton"
           >
             <li>
-              <a
-                href="#"
+              <Link
+                to={AppRoute.PROFILE}
                 className="block px-4 py-2 hover:bg-gray-200 font-semibold"
               >
                 Profile
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to={AppRoute.LOGIN}
                 className="px-4 py-2 flex items-center gap-3 hover:bg-red-400 hover:text-white font-semibold"
               >
                 Logout
                 <Icon icon="humbleicons:logout" className="" />
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

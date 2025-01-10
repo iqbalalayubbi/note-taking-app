@@ -49,7 +49,7 @@ const Login = () => {
         onSubmit={onSubmit}
       >
         <InputIcon
-          className="w-3/4"
+          className="w-3/4 md:w-1/2 lg:w-1/3"
           icon="iconamoon:profile"
           placeholder="Enter your username..."
           type="text"
@@ -57,14 +57,18 @@ const Login = () => {
           onChange={onChange}
         />
         <InputIcon
-          className="w-3/4"
+          className="w-3/4 md:w-1/2 lg:w-1/3"
           icon="carbon:password"
           placeholder="Enter your password..."
           type="password"
           name="password"
           onChange={onChange}
         />
-        <Button label="Login" type="submit" className="w-3/4 mt-10" />
+        <Button
+          label="Login"
+          type="submit"
+          className="w-3/4 mt-10 md:w-1/2 lg:w-1/3"
+        />
       </form>
     </main>
   );

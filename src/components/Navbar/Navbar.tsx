@@ -7,7 +7,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="py-5 px-5 shadow-md">
+    <nav className="py-5 px-5 shadow-md fixed w-full top-0 bg-white z-20">
       <section className="flex justify-between items-center">
         <h1 className="text-2xl font-bold text-purple-800">SIMPLIFY NOTE</h1>
         <InputIcon

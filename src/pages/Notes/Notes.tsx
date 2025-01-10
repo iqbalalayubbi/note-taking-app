@@ -5,11 +5,14 @@ import { useEffect, useState } from "react";
 import { notesStorage } from "@/api/storage";
 import { v4 as uuidv4 } from "uuid";
 import { NoteDataType } from "@/types";
+import { useNavigate } from "react-router";
+import { AppRoute } from "@/enums";
 
 const Notes = () => {
   const [title, setTitle] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [notes, setNotes] = useState<NoteDataType[]>([]);
+  const navigate = useNavigate();
 
   const onCreate = () => {
     setIsOpen(true);
@@ -23,11 +26,12 @@ const Notes = () => {
   };
 
   const handleEdit = (id: string | null) => {
-    console.log(id);
+    navigate(AppRoute.NOTE_ID.replace(":id", id as string));
   };
 
   const handleDelete = (id: string | null) => {
-    console.log(id);
+    notesStorage.deleteNote(id as string);
+    setNotes((prev) => prev.filter((n) => n.id !== (id as string)));
   };
 
   useEffect(() => {

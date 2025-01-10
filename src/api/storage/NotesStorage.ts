@@ -30,6 +30,18 @@ class NoteStorage extends BaseStorage {
     const updatedNotes = [...notes, note];
     this.setNotes(updatedNotes);
   }
+
+  public editNote(note: NoteDataType): void {
+    const notes = this.getNotes();
+    const updatedNotes = notes.map((n) => (n.id === note.id ? note : n));
+    this.setNotes(updatedNotes);
+  }
+
+  public deleteNote(id: string): void {
+    const notes = this.getNotes();
+    const updatedNotes = notes.filter((n) => n.id !== id);
+    this.setNotes(updatedNotes);
+  }
 }
 
 export { NoteStorage };

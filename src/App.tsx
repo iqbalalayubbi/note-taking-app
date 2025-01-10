@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router";
-import { Login } from "./pages";
+import { Login, Notes } from "./pages";
 import { AppRoute } from "./enums";
 
 const App = () => {
@@ -7,7 +7,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.LOGIN} element={<Login />} />
-        <Route path={AppRoute.NOTES} element={<h1>Notes Page</h1>} />
+        <Route path={AppRoute.NOTES} element={<Notes />} />
       </Routes>
     </BrowserRouter>
   );

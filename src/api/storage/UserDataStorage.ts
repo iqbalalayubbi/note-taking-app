@@ -25,8 +25,12 @@ class UserDataStorage extends BaseStorage {
     }
   }
 
-  public getUserData() {
-    return this.getItem();
+  public getUserData(): UserDataType {
+    if (this.getItem()) {
+      return this.getItem() as UserDataType;
+    } else {
+      return DEFAULT_USER_DATA as UserDataType;
+    }
   }
 
   public setUserData(userData: UserDataType) {

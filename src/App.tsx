@@ -9,19 +9,15 @@ const App = () => {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Routes>
-          <Route path={AppRoute.LOGIN} element={<Login />} />
-          <Route
-            element={
-              <NotesProvider>
-                <MainLayout />
-              </NotesProvider>
-            }
-          >
-            <Route path={AppRoute.NOTES} element={<Notes />} />
-            <Route path={AppRoute.NOTE_ID} element={<Note />} />
-          </Route>
-        </Routes>
+        <NotesProvider>
+          <Routes>
+            <Route path={AppRoute.LOGIN} element={<Login />} />
+            <Route element={<MainLayout />}>
+              <Route path={AppRoute.NOTES} element={<Notes />} />
+              <Route path={AppRoute.NOTE_ID} element={<Note />} />
+            </Route>
+          </Routes>
+        </NotesProvider>
       </AuthProvider>
     </BrowserRouter>
   );

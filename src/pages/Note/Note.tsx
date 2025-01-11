@@ -1,5 +1,4 @@
 import { notesStorage } from "@/api";
-import { Navbar } from "@/components";
 import { AppRoute } from "@/enums";
 import { NoteDataType } from "@/types";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
@@ -25,7 +24,6 @@ const Note = () => {
 
   return (
     <main>
-      <Navbar />
       <section className="mt-40 px-4 flex flex-col items-center border-2 border-slate-300 rounded-md py-4 mx-4 relative">
         <button
           className="rounded-full bg-sky-300 w-10 h-10 flex items-center justify-center shadow-md hover:bg-sky-500 transition-all duration-300 absolute right-5"

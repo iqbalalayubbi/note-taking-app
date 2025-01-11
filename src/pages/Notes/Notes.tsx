@@ -1,4 +1,4 @@
-import { Button, InputIcon, Modal, Navbar, Pagination } from "@/components";
+import { Button, InputIcon, Modal, Pagination } from "@/components";
 import { AddCard, NoteCard } from "./libs/components";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { useContext, useEffect, useState } from "@/hooks";
@@ -45,7 +45,6 @@ const Notes = () => {
 
   return (
     <main>
-      <Navbar />
       <section className="mt-44 md:mt-32 px-4 grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
         <AddCard onCreate={onCreate} />
         {notes?.map((note) => {

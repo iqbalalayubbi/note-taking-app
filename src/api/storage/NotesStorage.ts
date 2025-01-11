@@ -47,6 +47,13 @@ class NoteStorage extends BaseStorage {
     const notes = this.getNotes();
     return notes.find((n) => n.id === id) || null;
   }
+
+  public findNotesByTitle(title: string): NoteDataType[] {
+    const notes = this.getNotes();
+    return notes.filter((n) =>
+      n.title.toLowerCase().includes(title.toLowerCase()),
+    );
+  }
 }
 
 export { NoteStorage };

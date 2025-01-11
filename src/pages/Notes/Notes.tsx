@@ -1,18 +1,19 @@
 import { Button, InputIcon, Modal, Navbar } from "@/components";
 import { AddCard, NoteCard } from "./libs/components";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
-import { useEffect, useState } from "react";
-import { notesStorage } from "@/api/storage";
+import { useContext, useState } from "@/hooks";
 import { v4 as uuidv4 } from "uuid";
-import { NoteDataType } from "@/types";
 import { useNavigate } from "react-router";
 import { AppRoute } from "@/enums";
+import { NotesContext, NotesContextType } from "@/contexts";
 
 const Notes = () => {
   const [title, setTitle] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [notes, setNotes] = useState<NoteDataType[]>([]);
   const navigate = useNavigate();
+  const { notes, addNote, removeNote } = useContext(
+    NotesContext,
+  ) as NotesContextType;
 
   const onCreate = () => {
     setIsOpen(true);
@@ -20,8 +21,7 @@ const Notes = () => {
 
   const handleCreate = () => {
     const newNote = { id: uuidv4(), title, content: "" };
-    notesStorage.addNote(newNote);
-    setNotes((prev) => [...prev, newNote]);
+    addNote(newNote);
     setIsOpen(false);
   };
 
@@ -30,20 +30,15 @@ const Notes = () => {
   };
 
   const handleDelete = (id: string | null) => {
-    notesStorage.deleteNote(id as string);
-    setNotes((prev) => prev.filter((n) => n.id !== (id as string)));
+    removeNote(id as string);
   };
-
-  useEffect(() => {
-    setNotes(notesStorage.getNotes());
-  }, []);
 
   return (
     <main>
       <Navbar />
       <section className="mt-44 md:mt-32 px-4 grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
         <AddCard onCreate={onCreate} />
-        {notes.map((note) => {
+        {notes?.map((note) => {
           return (
             <NoteCard
               id={note.id}

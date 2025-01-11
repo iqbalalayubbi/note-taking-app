@@ -72,6 +72,7 @@ const Login = () => {
           label="Login"
           type="submit"
           className="w-3/4 mt-10 md:w-1/2 lg:w-1/3"
+          onClick={() => onSubmit}
         />
       </form>
     </main>

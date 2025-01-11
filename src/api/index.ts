@@ -1,1 +1,1 @@
-export { userDataStorage } from "./storage";
+export { userDataStorage, notesStorage } from "./storage";

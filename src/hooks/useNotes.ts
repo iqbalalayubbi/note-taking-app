@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 const useNotes = () => {
   const [notes, setNotes] = useState<NoteDataType[] | null>([]);
+  const DEFAULT_PAGE_SIZE = 1;
 
   const addNote = (note: NoteDataType): void => {
     notesStorage.addNote(note);
@@ -22,6 +23,23 @@ const useNotes = () => {
     setNotes(filterNotes);
   };
 
+  const getPagination = () => {
+    if (notes) {
+      const notesCount = notes.length;
+      const pageCount = Math.ceil(notesCount / DEFAULT_PAGE_SIZE);
+      return {
+        totalPages: pageCount,
+        currentPage: 1,
+        total: notesCount,
+      };
+    }
+    return {
+      totalPages: 0,
+      currentPage: 1,
+      total: 0,
+    };
+  };
+
   useEffect(() => {
     setNotes(notesStorage.getNotes());
   }, []);
@@ -31,6 +49,7 @@ const useNotes = () => {
     addNote,
     removeNote,
     searchNotes,
+    getPagination,
   };
 };
 

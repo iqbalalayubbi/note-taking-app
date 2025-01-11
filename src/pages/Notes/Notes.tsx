@@ -1,4 +1,4 @@
-import { Button, InputIcon, Modal, Navbar } from "@/components";
+import { Button, InputIcon, Modal, Navbar, Pagination } from "@/components";
 import { AddCard, NoteCard } from "./libs/components";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { useContext, useState } from "@/hooks";
@@ -74,6 +74,7 @@ const Notes = () => {
           onClick={handleCreate}
         />
       </Modal>
+      <Pagination />
     </main>
   );
 };

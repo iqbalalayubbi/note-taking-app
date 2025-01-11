@@ -36,6 +36,10 @@ class UserDataStorage extends BaseStorage {
   public setUserData(userData: UserDataType) {
     this.setItem(userData);
   }
+
+  public removeUserData() {
+    this.removeItem();
+  }
 }
 
 export { UserDataStorage };

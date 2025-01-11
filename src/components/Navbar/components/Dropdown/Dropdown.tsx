@@ -1,13 +1,20 @@
+import { userDataStorage } from "@/api";
 import { AppRoute } from "@/enums";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setIsOpen((prev) => !prev);
+  };
+
+  const handleLogout = () => {
+    userDataStorage.removeUserData();
+    navigate(AppRoute.LOGIN);
   };
 
   return (
@@ -37,13 +44,13 @@ const Dropdown = () => {
               </Link>
             </li>
             <li>
-              <Link
-                to={AppRoute.LOGIN}
-                className="px-4 py-2 flex items-center gap-3 hover:bg-red-400 hover:text-white font-semibold"
+              <button
+                onClick={() => handleLogout()}
+                className="px-4 py-2 flex items-center gap-3 hover:bg-red-400 hover:text-white font-semibold w-full"
               >
                 Logout
                 <Icon icon="humbleicons:logout" className="" />
-              </Link>
+              </button>
             </li>
           </ul>
         </div>

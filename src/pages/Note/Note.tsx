@@ -23,8 +23,8 @@ const Note = () => {
   }, [id]);
 
   return (
-    <main>
-      <section className="mt-40 px-4 flex flex-col items-center border-2 border-slate-300 rounded-md py-4 mx-4 relative">
+    <main className="flex justify-center">
+      <section className="px-4 flex flex-col items-center border-2 border-slate-300 rounded-md py-4 mx-4 relative md:w-1/2 w-full">
         <button
           className="rounded-full bg-sky-300 w-10 h-10 flex items-center justify-center shadow-md hover:bg-sky-500 transition-all duration-300 absolute right-5"
           onClick={() => setIsEditMode((prev) => !prev)}

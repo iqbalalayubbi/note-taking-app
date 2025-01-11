@@ -25,7 +25,7 @@ const Profile = () => {
 
   return (
     <section className="flex flex-col items-center gap-5">
-      <Icon icon="gg:profile" className="text-3xl" />
+      <Icon icon="gg:profile" className="text-6xl" />
       <span className="text-slate-500 italic text-sm">
         @{userData?.username}
       </span>
@@ -40,10 +40,10 @@ const Profile = () => {
       <Button
         label="Save"
         type="button"
-        className="w-3/4"
+        className="w-3/4 md:w-1/3 mt-10"
         onClick={() => handleChangeName()}
       />
-      <Link to={AppRoute.NOTES} className="w-3/4">
+      <Link to={AppRoute.NOTES} className="w-3/4 md:w-1/3">
         <Button
           label="Back to Note"
           type="button"

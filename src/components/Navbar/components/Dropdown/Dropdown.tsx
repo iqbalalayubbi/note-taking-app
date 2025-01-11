@@ -4,7 +4,7 @@ import { AppRoute } from "@/enums";
 import { UserDataType } from "@/types";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,6 +19,11 @@ const Dropdown = () => {
   const handleLogout = () => {
     userDataStorage.removeUserData();
     navigate(AppRoute.LOGIN);
+  };
+
+  const handleProfile = () => {
+    setIsOpen((prev) => !prev);
+    navigate(AppRoute.PROFILE);
   };
 
   useEffect(() => {
@@ -46,12 +51,12 @@ const Dropdown = () => {
             aria-labelledby="dropdownDefaultButton"
           >
             <li>
-              <Link
-                to={AppRoute.PROFILE}
-                className="block px-4 py-2 hover:bg-gray-200 font-semibold"
+              <button
+                onClick={() => handleProfile()}
+                className="block px-4 py-2 hover:bg-gray-200 font-semibold w-full text-start"
               >
                 Profile
-              </Link>
+              </button>
             </li>
             <li>
               <button

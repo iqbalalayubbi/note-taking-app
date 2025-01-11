@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router";
-import { Login, Note, Notes } from "./pages";
+import { Login, Note, Notes, Profile } from "./pages";
 import { AppRoute } from "./enums";
 import { NotesProvider } from "./contexts";
 import { MainLayout } from "./layouts/MainLayout/MainLayout";
@@ -15,6 +15,7 @@ const App = () => {
             <Route element={<MainLayout />}>
               <Route path={AppRoute.NOTES} element={<Notes />} />
               <Route path={AppRoute.NOTE_ID} element={<Note />} />
+              <Route path={AppRoute.PROFILE} element={<Profile />} />
             </Route>
           </Routes>
         </NotesProvider>

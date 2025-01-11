@@ -11,7 +11,7 @@ const Notes = () => {
   const [title, setTitle] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const { addNote, removeNote, notesResult, getNotesByPage } = useContext(
+  const { addNote, removeNote, getNotesByPage, notes } = useContext(
     NotesContext,
   ) as NotesContextType;
   const [searchParams] = useSearchParams();
@@ -48,19 +48,7 @@ const Notes = () => {
       <Navbar />
       <section className="mt-44 md:mt-32 px-4 grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
         <AddCard onCreate={onCreate} />
-        {/* {notes?.map((note) => {
-          return (
-            <NoteCard
-              id={note.id}
-              title={note.title}
-              content={note.content}
-              key={note.id}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-            />
-          );
-        })} */}
-        {notesResult?.map((note) => {
+        {notes?.map((note) => {
           return (
             <NoteCard
               id={note.id}

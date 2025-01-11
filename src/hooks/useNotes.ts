@@ -4,8 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 
 const useNotes = () => {
   const [notes, setNotes] = useState<NoteDataType[] | null>([]);
-  const [notesResult, setNotesResult] = useState<NoteDataType[] | null>([]);
-  const DEFAULT_PAGE_SIZE = 5;
+  const DEFAULT_PAGE_SIZE = 1;
 
   const addNote = (note: NoteDataType): void => {
     notesStorage.addNote(note);
@@ -20,13 +19,17 @@ const useNotes = () => {
   };
 
   const searchNotes = (title: string): void => {
-    const filterNotes = notesStorage.findNotesByTitle(title);
-    setNotes(filterNotes);
+    if (!title) {
+      getNotesByPage(1);
+    } else {
+      const filterNotes = notesStorage.findNotesByTitle(title);
+      setNotes(filterNotes);
+    }
   };
 
   const getPagination = () => {
-    if (notes) {
-      const notesCount = notes.length;
+    if (getAllNotes()) {
+      const notesCount = getAllNotes().length;
       const pageCount = Math.ceil(notesCount / DEFAULT_PAGE_SIZE);
       return {
         totalPages: pageCount,
@@ -41,15 +44,16 @@ const useNotes = () => {
     };
   };
 
-  const getNotesByPage = useCallback(
-    (page: number) => {
-      const startIndex = (page - 1) * DEFAULT_PAGE_SIZE;
-      const endIndex = startIndex + DEFAULT_PAGE_SIZE;
-      const newNotes = notes?.slice(startIndex, endIndex);
-      setNotesResult(newNotes as NoteDataType[]);
-    },
-    [notes, setNotesResult],
-  );
+  const getAllNotes = () => {
+    return notesStorage.getNotes();
+  };
+
+  const getNotesByPage = useCallback((page: number) => {
+    const startIndex = (page - 1) * DEFAULT_PAGE_SIZE;
+    const endIndex = startIndex + DEFAULT_PAGE_SIZE;
+    const newNotes = getAllNotes().slice(startIndex, endIndex);
+    setNotes(newNotes as NoteDataType[]);
+  }, []);
 
   useEffect(() => {
     setNotes(notesStorage.getNotes());
@@ -57,7 +61,6 @@ const useNotes = () => {
 
   return {
     notes,
-    notesResult,
     addNote,
     removeNote,
     searchNotes,

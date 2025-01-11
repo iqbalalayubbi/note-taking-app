@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 
 const useNotes = () => {
   const [notes, setNotes] = useState<NoteDataType[] | null>([]);
-  const DEFAULT_PAGE_SIZE = 1;
+  const DEFAULT_PAGE_SIZE = 5;
 
   const addNote = (note: NoteDataType): void => {
     notesStorage.addNote(note);

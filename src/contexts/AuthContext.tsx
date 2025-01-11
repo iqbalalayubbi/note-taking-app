@@ -1,12 +1,9 @@
 import { userDataStorage } from "@/api";
 import { AppRoute } from "@/enums";
+import { UserDataType } from "@/types";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-
-type AuthContextType = {
-  isAuthenticated: boolean;
-  setIsAuthenticated: (value: boolean) => void;
-};
+import { AuthContextType } from "./types";
 
 type Properties = {
   children: React.ReactNode;
@@ -15,12 +12,14 @@ type Properties = {
 const AuthContext = createContext<AuthContextType | null>(null);
 const AuthProvider = ({ children }: Properties) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [userData, setUserData] = useState<UserDataType>();
   const navigate = useNavigate();
 
   useEffect(() => {
     const user = userDataStorage.getUserData();
     if (!user) navigate(AppRoute.LOGIN);
 
+    setUserData(user);
     if (user.isAuthenticated) {
       setIsAuthenticated(true);
     } else {
@@ -30,7 +29,13 @@ const AuthProvider = ({ children }: Properties) => {
   }, [navigate]);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        setIsAuthenticated,
+        userData: userData as UserDataType,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

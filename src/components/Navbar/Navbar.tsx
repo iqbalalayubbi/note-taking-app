@@ -1,9 +1,13 @@
 import { InputIcon } from "@/components";
 import { Dropdown } from "./components";
+import { NotesContext, NotesContextType } from "@/contexts";
+import { useContext } from "react";
 
 const Navbar = () => {
-  const onSearch = (name: string, value: string) => {
-    console.log(name, value);
+  const { searchNotes } = useContext(NotesContext) as NotesContextType;
+
+  const onSearch = (_name: string, value: string) => {
+    searchNotes(value);
   };
 
   return (

@@ -17,6 +17,11 @@ const useNotes = () => {
     );
   };
 
+  const searchNotes = (title: string): void => {
+    const filterNotes = notesStorage.findNotesByTitle(title);
+    setNotes(filterNotes);
+  };
+
   useEffect(() => {
     setNotes(notesStorage.getNotes());
   }, []);
@@ -25,6 +30,7 @@ const useNotes = () => {
     notes,
     addNote,
     removeNote,
+    searchNotes,
   };
 };
 

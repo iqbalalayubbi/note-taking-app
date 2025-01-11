@@ -1,9 +1,9 @@
 import { Button, InputIcon, Modal, Navbar, Pagination } from "@/components";
 import { AddCard, NoteCard } from "./libs/components";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
-import { useContext, useState } from "@/hooks";
+import { useContext, useEffect, useState } from "@/hooks";
 import { v4 as uuidv4 } from "uuid";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { AppRoute } from "@/enums";
 import { NotesContext, NotesContextType } from "@/contexts";
 
@@ -11,9 +11,11 @@ const Notes = () => {
   const [title, setTitle] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const { notes, addNote, removeNote } = useContext(
+  const { addNote, removeNote, notesResult, getNotesByPage } = useContext(
     NotesContext,
   ) as NotesContextType;
+  const [searchParams] = useSearchParams();
+  const currentPage = searchParams.get("page");
 
   const onCreate = () => {
     setIsOpen(true);
@@ -33,12 +35,32 @@ const Notes = () => {
     removeNote(id as string);
   };
 
+  useEffect(() => {
+    if (currentPage) {
+      getNotesByPage(parseInt(currentPage));
+    } else {
+      getNotesByPage(1);
+    }
+  }, [getNotesByPage, currentPage]);
+
   return (
     <main>
       <Navbar />
       <section className="mt-44 md:mt-32 px-4 grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
         <AddCard onCreate={onCreate} />
-        {notes?.map((note) => {
+        {/* {notes?.map((note) => {
+          return (
+            <NoteCard
+              id={note.id}
+              title={note.title}
+              content={note.content}
+              key={note.id}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+            />
+          );
+        })} */}
+        {notesResult?.map((note) => {
           return (
             <NoteCard
               id={note.id}

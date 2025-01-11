@@ -1,10 +1,11 @@
 import { notesStorage } from "@/api";
 import { NoteDataType } from "@/types";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const useNotes = () => {
   const [notes, setNotes] = useState<NoteDataType[] | null>([]);
-  const DEFAULT_PAGE_SIZE = 1;
+  const [notesResult, setNotesResult] = useState<NoteDataType[] | null>([]);
+  const DEFAULT_PAGE_SIZE = 5;
 
   const addNote = (note: NoteDataType): void => {
     notesStorage.addNote(note);
@@ -40,16 +41,28 @@ const useNotes = () => {
     };
   };
 
+  const getNotesByPage = useCallback(
+    (page: number) => {
+      const startIndex = (page - 1) * DEFAULT_PAGE_SIZE;
+      const endIndex = startIndex + DEFAULT_PAGE_SIZE;
+      const newNotes = notes?.slice(startIndex, endIndex);
+      setNotesResult(newNotes as NoteDataType[]);
+    },
+    [notes, setNotesResult],
+  );
+
   useEffect(() => {
     setNotes(notesStorage.getNotes());
   }, []);
 
   return {
     notes,
+    notesResult,
     addNote,
     removeNote,
     searchNotes,
     getPagination,
+    getNotesByPage,
   };
 };
 

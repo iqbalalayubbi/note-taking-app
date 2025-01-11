@@ -19,6 +19,7 @@ const Pagination = () => {
     } else {
       setPage(newPage as string);
     }
+
     navigate(AppRoute.NOTES_PAGE.replace(":page", newPage as string));
   };
 

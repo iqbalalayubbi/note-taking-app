@@ -15,6 +15,12 @@ const AuthProvider = ({ children }: Properties) => {
   const [userData, setUserData] = useState<UserDataType>();
   const navigate = useNavigate();
 
+  const changeUserDataName = (name: string) => {
+    userDataStorage.changeName(name);
+    const newUser = userDataStorage.getUserData();
+    setUserData(newUser);
+  };
+
   useEffect(() => {
     const user = userDataStorage.getUserData();
     if (!user) navigate(AppRoute.LOGIN);
@@ -34,6 +40,7 @@ const AuthProvider = ({ children }: Properties) => {
         isAuthenticated,
         setIsAuthenticated,
         userData: userData as UserDataType,
+        changeUserDataName,
       }}
     >
       {children}

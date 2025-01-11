@@ -3,11 +3,14 @@ import { AuthContext, AuthContextType } from "@/contexts";
 import { AppRoute } from "@/enums";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const Profile = () => {
   const [fullName, setFullname] = useState<string>("");
-  const { userData } = useContext(AuthContext) as AuthContextType;
+  const { userData, changeUserDataName } = useContext(
+    AuthContext,
+  ) as AuthContextType;
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (userData) {
@@ -16,7 +19,8 @@ const Profile = () => {
   }, [userData]);
 
   const handleChangeName = () => {
-    // d
+    changeUserDataName(fullName);
+    navigate(AppRoute.NOTES);
   };
 
   return (

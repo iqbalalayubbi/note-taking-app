@@ -1,15 +1,13 @@
 import { userDataStorage } from "@/api";
 import { AuthContext, AuthContextType } from "@/contexts";
 import { AppRoute } from "@/enums";
-import { UserDataType } from "@/types";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 
 const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const [user, setUser] = useState<UserDataType>();
   const { userData } = useContext(AuthContext) as AuthContextType;
 
   const toggleDropdown = () => {
@@ -26,19 +24,13 @@ const Dropdown = () => {
     navigate(AppRoute.PROFILE);
   };
 
-  useEffect(() => {
-    if (userData) {
-      setUser(userData);
-    }
-  }, [userData]);
-
   return (
     <div className="relative flex flex-col items-center">
       <button
         className="hover:opacity-50 flex items-center gap-3 "
         onClick={() => toggleDropdown()}
       >
-        <span className="font-bold">{user?.name}</span>
+        <span className="font-bold">{userData?.name}</span>
         <Icon icon="gg:profile" className="text-3xl" />
       </button>
       {isOpen && (

@@ -40,6 +40,12 @@ class UserDataStorage extends BaseStorage {
   public removeUserData() {
     this.removeItem();
   }
+
+  public changeName(name: string) {
+    const user = this.getUserData();
+    user.name = name;
+    this.setUserData(user);
+  }
 }
 
 export { UserDataStorage };
